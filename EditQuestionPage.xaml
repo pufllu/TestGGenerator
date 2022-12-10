@@ -1,0 +1,60 @@
+﻿<Page x:Class="TestGGenerator.EditQuestionPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TestGGenerator"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="EditQuestionPage">
+
+    <Page.Resources>
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Style.Triggers>
+                <Trigger Property="Button.IsFocused" Value="True">
+                    <Setter Property="Button.Foreground" Value="#8b00ff" />
+                </Trigger>
+                <Trigger Property="Button.IsMouseOver" Value="True">
+                    <Setter Property="Button.Foreground" Value="#8b00ff" />
+                    <Setter Property="Button.FontWeight" Value="Bold" />
+                </Trigger>
+                <!--<Trigger Property="Button.IsPressed" Value="False">
+                    <Setter Property="Button.Foreground" Value="#8b00ff" />
+                </Trigger>-->
+            </Style.Triggers>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="10"
+                                Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Foreground" Value="#8b00ff"/>
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Label Content="Редактирование вопросов" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+        <Label Content="Вопрос" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" FontSize="20"/>
+        <TextBox x:Name="EditQst" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Width="250" Height="30"/>
+        <Label Content="Ответ" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" FontSize="20"/>
+        <TextBox x:Name="EditAnswer" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Width="250" Height="30"/>
+        <Border CornerRadius="10" BorderThickness="1" BorderBrush="#8b00ff" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="2" Width="200">
+            <Button Content="Завершить редактирование" Style="{StaticResource ButtonStyle}" Name="BtnSave" Click="saveEdit"/>
+        </Border>
+    </Grid>
+</Page>

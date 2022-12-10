@@ -1,0 +1,61 @@
+﻿<Page x:Class="TestGGenerator.TestPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TestGGenerator"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="TestPage">
+    <Page.Resources>
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Style.Triggers>
+                <Trigger Property="Button.IsFocused" Value="True">
+                    <Setter Property="Button.Foreground" Value="#8b00ff" />
+                </Trigger>
+                <Trigger Property="Button.IsMouseOver" Value="True">
+                    <Setter Property="Button.Foreground" Value="#8b00ff" />
+                    <Setter Property="Button.FontWeight" Value="Bold" />
+                </Trigger>
+                <!--<Trigger Property="Button.IsPressed" Value="False">
+                    <Setter Property="Button.Foreground" Value="#8b00ff" />
+                </Trigger>-->
+            </Style.Triggers>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="10"
+                                Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Foreground" Value="#8b00ff"/>
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Label Content="Введите вопросы:" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <!-- Поля для кол-во вопросов -->
+        <TextBox VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="200" Margin="10" Name="CountQuest"/>
+        <Label Content="Введите имя теста:" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="2"/>
+        <!-- Поля для имени теста -->
+        <TextBox VerticalAlignment="Bottom" Grid.Column="2" HorizontalAlignment="Center" Width="200" Margin="10" Name="NameTest"/>
+        <Label Content="Выберете тему:" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1"/>
+        <ComboBox Grid.Row="1" DisplayMemberPath="nameTheme" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="10" Width="200" Name="ComboBoxTheme" SelectionChanged="ChangeTheme"/>
+        <Border CornerRadius="10" Grid.ColumnSpan="2" Grid.Row="2" BorderThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200"  BorderBrush="#8b00ff">
+            <Button Content="Создать тест" Style="{StaticResource ButtonStyle}"  Name="ThemeItem" Click="CreateTests"/>
+        </Border>
+    </Grid>
+</Page>

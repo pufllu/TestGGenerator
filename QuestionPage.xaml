@@ -1,0 +1,87 @@
+﻿<Page x:Class="TestGGenerator.QuestionPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TestGGenerator"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="QuestionPage">
+
+    <Page.Resources>
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Style.Triggers>
+                <Trigger Property="Button.IsFocused" Value="True">
+                    <Setter Property="Button.Foreground" Value="#8b00ff" />
+                </Trigger>
+                <Trigger Property="Button.IsMouseOver" Value="True">
+                    <Setter Property="Button.Foreground" Value="#8b00ff" />
+                    <Setter Property="Button.FontWeight" Value="Bold" />
+                </Trigger>
+                <!--<Trigger Property="Button.IsPressed" Value="False">
+                    <Setter Property="Button.Foreground" Value="#8b00ff" />
+                </Trigger>-->
+            </Style.Triggers>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="10"
+                                Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Foreground" Value="#8b00ff"/>
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
+
+        <Label Content="Вопросы" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <Label Content="Введите вопрос:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="2" Grid.Row="1"/>
+        <Label Content="Введите ответ:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="2" Grid.Row="2"/>
+        <Label Content="Поиск вопроса:" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBox x:Name="textBoxQuestion"  HorizontalAlignment="Right" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Width="150"/>
+        <TextBox x:Name="textBoxAnswer"  HorizontalAlignment="Right" Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" Width="150"/>
+        <TextBox x:Name="textBoxSearch" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Grid.Row="2" TextChanged="ChangeSearch"/>
+        <ComboBox Name="ComboBoxQuestionDis" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Center" Width="200" DisplayMemberPath="nameDiscipline" SelectionChanged="ChangeDiscipline"/>
+        <ComboBox Name="ComboBoxQuestionThe" Grid.Row="4" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Width="200" DisplayMemberPath="nameTheme" SelectionChanged="ChangeTheme"/>
+
+        <Border CornerRadius="10" BorderBrush="#8b00ff" BorderThickness="1" Grid.Row="3" Grid.Column="2" Width="200">
+            <Button  Style="{StaticResource ButtonStyle}" Content="Добавить вопрос" x:Name="ButtonQuestion" Click="AddBtnQuestion"/>
+        </Border>
+        <Border CornerRadius="10" BorderBrush="#8b00ff" Grid.Row="3" BorderThickness="1" Width="200">
+            <Button  Style="{StaticResource ButtonStyle}" Content="Добавить вопрос с устройства" x:Name="AddFile" Click="FileAddQuestion"/>
+        </Border>
+
+        <DataGrid Grid.Row="5" Grid.ColumnSpan="2" x:Name="QuestionTable" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Вопрос" Width="*" Binding="{Binding question}"/>
+                <DataGridTextColumn Header="Ответ" Width="*" Binding="{Binding answer}"/>
+                <DataGridTextColumn Header="Дисциплина" Width="*" Binding="{Binding nameDiscipline}"/>
+                <DataGridTextColumn Header="Тема" Width="*" Binding="{Binding nameTheme}"/>
+            </DataGrid.Columns>
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Редактировать" Click="EditQuestion"/>
+                    <MenuItem Header="Удалить" Click="DelQuestion"/>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+        </DataGrid>
+
+    </Grid>
+</Page>
